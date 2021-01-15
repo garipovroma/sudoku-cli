@@ -91,8 +91,13 @@ def generate(deleted_cells_num):
             result = heavy_swap_rows(result)
         elif transform_type == 5:
             result = heavy_swap_columns(result)
+    used = []
     for i in range(deleted_cells_num):
         x = rand(0, 8)
         y = rand(0, 8)
+        while (x * 9 + y) in used:
+            x = rand(0, 8)
+            y = rand(0, 8)
+        used.append(x * 9 + y)
         result[x][y] = 0
     return result
