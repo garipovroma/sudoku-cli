@@ -1,4 +1,6 @@
 from random import randint as rand
+from random import seed
+import time
 
 base_grid = [[2, 3, 8, 9, 6, 5, 7, 1, 4],
              [7, 5, 9, 4, 1, 3, 6, 8, 2],
@@ -74,20 +76,21 @@ def print(grid):
 
 
 def generate(deleted_cells_num):
+    seed(time.time())
     result = base_grid
-    iterations_num = rand(0, 500)
+    iterations_num = rand(0, 5000)
     for i in range(iterations_num):
         transform_type = rand(1, 5)
         if transform_type == 1:
-            transpose(result)
+            result = transpose(result)
         elif transform_type == 2:
-            light_swap_rows(result)
+            result = light_swap_rows(result)
         elif transform_type == 3:
-            light_swap_columns(result)
+            result = light_swap_columns(result)
         elif transform_type == 4:
-            heavy_swap_rows(result)
+            result = heavy_swap_rows(result)
         elif transform_type == 5:
-            heavy_swap_columns(result)
+            result = heavy_swap_columns(result)
     for i in range(deleted_cells_num):
         x = rand(0, 8)
         y = rand(0, 8)

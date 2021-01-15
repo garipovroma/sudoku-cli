@@ -69,7 +69,7 @@ class Field:
                 if cell != -1:
                     subfield.append(cell)
         if value in vertical or value in horizontal or value in subfield:
-            raise InvalidMoveError.InvalidMoveError("you cant place this value here")
+            raise InvalidMoveError("You cant place this value here")
 
     def make_move(self, x, y, value):
         self.grid[x][y] = value
