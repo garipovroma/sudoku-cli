@@ -1,17 +1,35 @@
 from ..error.InvalidMoveError import InvalidMoveError
 from ..base import SudokuGridGenerator
 
+
 class Field:
-    def __init__(self):
-        print(">>> Enter filled cells count")
-        self.free_cells = 81 - int(input())
+    def __init__(self, *args):
         self.n = 9
-        self.grid = SudokuGridGenerator.generate(self.free_cells)
-        self.state = "game_running"
-        self.last_move = ""
+        if len(args) == 0:
+            print(">>> Enter filled cells count, integer from [0..80]")
+            x = -1
+            while x < 0 or x > 80:
+                try:
+                    x = int(input())
+                    if x < 0 or x > 80:
+                        print("Invalid value, it should be integer from [0..80]")
+                except ValueError:
+                    print(">>> Invalid value, it should be integer")
+            self.free_cells = 81 - x
+            self.grid = SudokuGridGenerator.generate(self.free_cells)
+            self.state = "game_running"
+            self.last_move = ""
+        else:
+            self.grid = args[0]
+            self.free_cells = args[1]
+            self.state = args[2]
+            self.last_move = args[3]
+
+
 
     def __str__(self):
-        res = "[state : " + self.state + " | free cells : " + str(self.free_cells) + " | last_move : " + self.last_move + "]\n"
+        res = "[state : " + self.state + " | free cells : " + str(
+            self.free_cells) + " | last_move : " + self.last_move + "]\n"
         for i in range(len(self.grid)):
             if i % 3 == 0:
                 res += "\n"

@@ -1,6 +1,5 @@
 from src.base.Game import Game
-from src.base import Field
-from src.player import HumanPlayer
+from src.player.HumanPlayer import HumanPlayer
 
-game = Game(HumanPlayer.HumanPlayer())
-game.run_game(Field.Field())
+game = Game(HumanPlayer())
+game.run_game()
